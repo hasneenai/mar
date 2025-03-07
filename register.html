@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إنشاء حساب</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #6a11cb, #2575fc); /* تغيير الخلفية إلى تدرج لوني جميل */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: #ffebee; /* لون وردي فاتح جميل */
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 320px;
+            border: 2px solid #ddd; /* حدود ناعمة للواجهة */
+        }
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 24px;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 12px 0;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            font-size: 16px;
+            background: #fafafa;
+            transition: 0.3s;
+        }
+        input:focus {
+            border-color: #2575fc; /* عند التركيز على الحقول يتم تغيير اللون */
+            background: #e9f4ff;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #2575fc;
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #1e63cc;
+        }
+        p {
+            margin-top: 15px;
+            font-size: 14px;
+        }
+        a {
+            color: #2575fc;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <script>
+        // دالة لتحويل المستخدم إلى home.html بعد نجاح التسجيل
+        function redirectToHome(event) {
+            event.preventDefault(); // منع إرسال النموذج
+            // هنا يمكن إضافة كود لحفظ البيانات أو التحقق من صحتها
+            window.location.href = "home.html"; // التوجيه إلى صفحة home
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>إنشاء حساب</h2>
+        <form onsubmit="redirectToHome(event)">
+            <input type="text" placeholder="الاسم الكامل" required>
+            <input type="text" placeholder="اسم المستخدم" required>
+            <input type="email" placeholder="البريد الإلكتروني" required>
+            <input type="password" placeholder="كلمة المرور" required>
+            <input type="password" placeholder="تأكيد كلمة المرور" required>
+            <button type="submit">إنشاء حساب</button>
+            <p>لديك حساب؟ <a href="login.html">سجل دخولك</a></p>
+        </form>
+    </div>
+</body>
+</html>
