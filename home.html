@@ -11,13 +11,14 @@
             direction: rtl;
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #6a11cb, #2575fc); /* خلفية مشابهة لتسجيل الدخول */
+            background-color: #000; /* خلفية الصفحة سوداء */
             display: flex;
             flex-direction: column;
             align-items: center;
-            color: white;
+            color: black; /* النص سيكون باللون الأسود */
             text-align: center;
             min-height: 100vh;
+            transition: background-color 0.3s, color 0.3s; /* لإضافة تأثير التحول */
         }
 
         .navbar {
@@ -32,6 +33,17 @@
             font-size: 1.2rem;
             font-weight: bold;
             transition: all 0.3s ease-in-out;
+            z-index: 10;
+        }
+
+        .toggle-icon {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            font-size: 2rem;
+            color: white;
+            cursor: pointer;
+            z-index: 1000;
         }
 
         .teacher-cards {
@@ -44,16 +56,16 @@
         }
 
         .teacher-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            background: #808080; /* خلفية البطاقات باللون الرمادي */
             padding: 20px;
             border-radius: 15px;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
             display: flex;
-            flex-direction: row-reverse; /* يجعل الصورة على اليمين */
+            flex-direction: row-reverse;
             align-items: center;
             justify-content: start;
             transition: transform 0.3s ease-in-out;
+            cursor: pointer;
         }
 
         .teacher-card:hover {
@@ -65,8 +77,8 @@
             height: 80px;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid white;
-            margin-right: 15px; /* المسافة بين الصورة والاسم */
+            border: 3px solid black;
+            margin-right: 15px;
         }
 
         .teacher-info {
@@ -76,30 +88,15 @@
         }
 
         .teacher-name {
-            font-size: 1.2rem; /* تم تصغير الحجم */
+            font-size: 1.2rem;
             font-weight: bold;
             margin-bottom: 5px;
+            color: white;
         }
 
         .course-title {
             font-size: 1.1rem;
-            color: #f7f7f7;
-        }
-
-        .button {
-            background-color: #2575fc;
             color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 1rem;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background 0.3s ease, transform 0.3s ease;
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .button:hover {
-            background-color: #1e63cc;
         }
 
         footer {
@@ -108,6 +105,11 @@
             color: #ccc;
             text-align: center;
             padding: 15px;
+            background-color: transparent; /* جعل الخلفية شفافة */
+        }
+
+        footer p {
+            color: white;
         }
 
         .support {
@@ -116,92 +118,109 @@
             color: #e74c3c;
             font-weight: bold;
         }
+
+        /* وضع النهار */
+        body.day-mode {
+            background-color: #f0f0f0; /* خلفية بيضاء فاتحة */
+            color: black; /* النص باللون الأسود */
+        }
+
+        body.day-mode .teacher-card {
+            background: #d3d3d3; /* خلفية البطاقات باللون الرمادي الفاتح */
+        }
+
+        body.day-mode .teacher-name, 
+        body.day-mode .course-title {
+            color: black; /* النص باللون الأسود في الوضع النهاري */
+        }
+
+        body.day-mode footer p {
+            color: black; /* النص في الفوتر باللون الأسود */
+        }
+
+        body.day-mode .navbar {
+            color: black; /* النص في الفوتر باللون الأسود */
+        }
     </style>
 </head>
 <body>
 
+    <div class="toggle-icon" onclick="toggleMode()">☀</div>
+
     <div class="navbar"> منصة ماكس التعليمة </div>
 
     <div class="teacher-cards">
-        <div class="teacher-card">
+        <div class="teacher-card" onclick="window.location.href='nn.html'">
             <div class="teacher-info">
                 <p class="teacher-name">نورس الموسوي</p>
                 <p class="course-title">دورة الرياضيات 2025</p>
             </div>
             <img src="https://api.telegram.org/file/bot7870588893:AAFshq8Fi5Ikw8GhOpMM3NR-oMr_yF2Vdtw/photos/file_22.jpg" class="teacher-img" alt="نورس الموسوي">
-            <button class="button" onclick="window.location.href='nn.html'">الدخول</button>
         </div>
 
-        <div class="teacher-card">
+        <div class="teacher-card" onclick="window.location.href='kk.html'">
             <div class="teacher-info">
                 <p class="teacher-name">حسين الهاشمي</p>
                 <p class="course-title">دورة الكيمياء 2025</p>
             </div>
             <img src="https://api.telegram.org/file/bot7870588893:AAFshq8Fi5Ikw8GhOpMM3NR-oMr_yF2Vdtw/photos/file_26.jpg" class="teacher-img" alt="حسين الهاشمي">
-            <button class="button" onclick="window.location.href='kk'">الدخول</button>
         </div>
 
-        <div class="teacher-card">
+        <div class="teacher-card" onclick="window.location.href='mm.html'">
             <div class="teacher-info">
                 <p class="teacher-name">حسن عبد الكاظم</p>
                 <p class="course-title">دورة الفيزياء 2025</p>
             </div>
             <img src="https://api.telegram.org/file/bot7870588893:AAFshq8Fi5Ikw8GhOpMM3NR-oMr_yF2Vdtw/photos/file_21.jpg" class="teacher-img" alt="حسن عبد الكاظم">
-            <button class="button" onclick="window.location.href='mm.html'">الدخول</button>
         </div>
 
-        <div class="teacher-card">
+        <!-- باقي المدرسين -->
+        <div class="teacher-card" onclick="window.location.href='hhhh.html'">
             <div class="teacher-info">
                 <p class="teacher-name">حيدر عبد الأئمة</p>
                 <p class="course-title">دورة الرياضيات 2025</p>
             </div>
             <img src="https://www.king-of-knowledge.com/uploads/thumbnails/course_thumbnails/optimized/course_thumbnail_default-new_351734301485.jpg" class="teacher-img" alt="حيدر عبد الأئمة">
-            <button class="button" onclick="window.location.href='hhhh.html'">الدخول</button>
         </div>
 
-        <div class="teacher-card">
+        <div class="teacher-card" onclick="window.location.href='sajed.html'">
             <div class="teacher-info">
                 <p class="teacher-name">ساجد العكيلي</p>
                 <p class="course-title">دورة التربية الإسلامية 2025</p>
             </div>
             <img src="https://d157djim0keagl.cloudfront.net/76c26858-4c62-47a5-ba8e-2ac359420814.webp" class="teacher-img" alt="ساجد العكيلي">
-            <button class="button" onclick="window.location.href='sajed.html'">الدخول</button>
         </div>
 
-        <div class="teacher-card">
+        <div class="teacher-card" onclick="window.location.href='hhhsch.html'">
             <div class="teacher-info">
                 <p class="teacher-name">مويد سليم</p>
                 <p class="course-title">دورة الفيزياء 2025</p>
             </div>
             <img src="https://api.telegram.org/file/bot7870588893:AAFshq8Fi5Ikw8GhOpMM3NR-oMr_yF2Vdtw/photos/file_17.jpg" class="teacher-img" alt="مويد سليم">
-            <button class="button" onclick="window.location.href='hhhsch.html'">الدخول</button>
         </div>
 
-        <div class="teacher-card">
+        <div class="teacher-card" onclick="window.location.href='hosy.html'">
             <div class="teacher-info">
                 <p class="teacher-name">هشام المعموري</p>
                 <p class="course-title">دورة خاصة 2025</p>
             </div>
             <img src="https://d157djim0keagl.cloudfront.net/9ff0c09e-2f9b-42ca-a49b-facc40fc3141.webp" class="teacher-img" alt="هشام المعموري">
-            <button class="button" onclick="window.location.href='hosy.html'">الدخول</button>
         </div>
 
-        <div class="teacher-card">
+        <div class="teacher-card" onclick="window.location.href='rafel.html'">
             <div class="teacher-info">
                 <p class="teacher-name">رفل الزبيدي</p>
                 <p class="course-title">دورة خاصة 2025</p>
             </div>
             <img src="https://d157djim0keagl.cloudfront.net/8bfd0c12-4628-4e01-9c30-81d439415eb7.webp" class="teacher-img" alt="رفل الزبيدي">
-            <button class="button" onclick="window.location.href='rafel.html'">الدخول</button>
         </div>
 
-        <div class="teacher-card">
+        <div class="teacher-card" onclick="window.location.href='hachem.html'">
             <div class="teacher-info">
                 <p class="teacher-name">هاشم الغرباوي</p>
                 <p class="course-title">دورة الكيمياء 2025</p>
             </div>
             <img src="https://www.king-of-knowledge.com/uploads/thumbnails/course_thumbnails/optimized/course_thumbnail_default-new_371734380750.jpg" class="teacher-img" alt="هاشم الغرباوي">
-            <button class="button" onclick="window.location.href='hachem.html'">الدخول</button>
         </div>
     </div>
 
@@ -209,5 +228,15 @@
         <p>© منصة ماكس التعليمية</p>
         <a href="https://t.me/uumm20" class="support">تواصل مع الدعم</a>
     </footer>
+
+    <script>
+        function toggleMode() {
+            document.body.classList.toggle('day-mode');
+            const icon = document.querySelector('.toggle-icon');
+            icon.innerHTML = document.body.classList.contains('day-mode') ? '🌙' : '☀';
+        }
+    </script>
+
 </body>
 </html>
+
