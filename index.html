@@ -3,72 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مشغل أكواد بايثون</title>
+    <title>تسجيل الدخول</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #1e1e1e;
-            color: #ffffff;
-            text-align: center;
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #6a11cb, #2575fc); /* خلفية تدرج جميلة */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
             margin: 0;
-            padding: 20px;
         }
-        h2 { color: #00ffcc; }
-        textarea {
-            width: 90%; height: 200px; font-family: monospace;
-            background-color: #2b2b2b; color: #00ff00;
-            border: 1px solid #555; padding: 10px; resize: none;
+        .container {
+            background: #ffebee; /* لون وردي فاتح جميل */
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 320px;
+            border: 2px solid #ddd;
         }
-        input, button {
-            margin: 10px; padding: 10px; font-size: 16px;
-            border: none; border-radius: 5px;
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 24px;
         }
-        input { width: 200px; background-color: #444; color: #fff; text-align: center; }
-        button { background-color: #00cc66; color: white; cursor: pointer; }
-        button:hover { background-color: #00994d; }
-        .console {
-            width: 90%; height: 200px; background: #000; color: #0f0;
-            overflow-y: auto; text-align: left; padding: 10px;
-            border: 1px solid #333; margin: auto;
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 12px 0;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            font-size: 16px;
+            background: #fafafa;
+            transition: 0.3s;
+        }
+        input:focus {
+            border-color: #2575fc; /* تغيير اللون عند التركيز على الحقل */
+            background: #e9f4ff;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #2575fc;
+            border: none;
+            color: yellow;
+            font-size: 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #1e63cc;
+        }
+        p {
+            margin-top: 15px;
+            font-size: 14px;
+        }
+        a {
+            color: #2575fc;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .support {
+            display: block;
+            margin-top: 10px;
+            color: #e74c3c;
         }
     </style>
-</head>
-<body>
-
-    <h2>مشغل أكواد بايثون</h2>
-
-    <textarea id="code" placeholder="اكتب كود بايثون هنا..."></textarea><br>
-    <input type="text" id="filename" placeholder="اسم الملف (مثلاً bot.py)">
-    <button onclick="saveCode()">حفظ</button>
-
-    <h3>Console:</h3>
-    <div class="console" id="console">هنا ستظهر النتائج...</div>
-
-    <button onclick="startScript()">بدء</button>
-    <button onclick="stopScript()">إيقاف</button>
-
     <script>
-        function saveCode() {
-            const code = document.getElementById("code").value;
-            const filename = document.getElementById("filename").value || "script.py";
-
-            fetch("/save", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ filename, code })
-            }).then(response => response.text()).then(alert);
-        }
-
-        function startScript() {
-            fetch("/start").then(response => response.text()).then(output => {
-                document.getElementById("console").innerText = output;
-            });
-        }
-
-        function stopScript() {
-            fetch("/stop").then(response => response.text()).then(alert);
+        // دالة لتحويل المستخدم إلى home.html بعد تسجيل الدخول بنجاح
+        function redirectToHome(event) {
+            event.preventDefault(); // منع إرسال النموذج
+            // هنا يمكن إضافة كود لحفظ بيانات تسجيل الدخول أو التحقق منها
+            window.location.href = "home.html"; // التوجيه إلى صفحة home
         }
     </script>
-
+</head>
+<body>
+    <div class="container">
+        <h2>تسجيل الدخول</h2>
+        <form onsubmit="redirectToHome(event)">
+            <input type="text" placeholder="اسم المستخدم أو البريد الإلكتروني" required>
+            <input type="password" placeholder="كلمة المرور" required>
+            <button type="submit">تسجيل الدخول</button>
+            <p>ليس لديك حساب؟ <a href="register.html">سجل من هنا</a></p>
+            <p><a href="https://t.me/py_hl" class="support">تواصل مع الدعم</a></p>
+        </form>
+    </div>
 </body>
 </html>
