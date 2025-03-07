@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>واجهة الدروس</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Cairo', sans-serif;
+    }
+
+    body {
+        direction: rtl;
+        background: linear-gradient(135deg, #dde6f2, #c2d3eb);
+        color: #2c3e50;
+        text-align: center;
+        padding: 30px;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    h1 {
+        font-size: 2.4rem;
+        font-weight: 700;
+        margin-bottom: 40px;
+        color: #2a7fc3;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        width: 100%;
+        max-width: 800px;
+    }
+
+    .chapter {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 15px;
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        cursor: pointer;
+        transition: transform 0.3s ease-in-out;
+        margin-bottom: 20px;
+    }
+
+    .chapter:hover {
+        transform: translateY(-8px);
+    }
+
+    .chapter-title {
+        padding: 18px;
+        font-size: 1.8rem;
+        font-weight: bold;
+        background: linear-gradient(135deg, #467fcf, #2b59b5);
+        color: #ffffff;
+    }
+
+    .lecture-list {
+        display: none;
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 0 0 15px 15px;
+    }
+
+    .lecture {
+        padding: 12px 14px;
+        background: linear-gradient(135deg, #34ace0, #227093);
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 1.2rem;
+        transition: all 0.3s ease;
+        color: white;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .lecture:hover {
+        background: linear-gradient(135deg, #218cbb, #1b658d);
+        transform: scale(1.05);
+    }
+
+    .video-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+    }
+
+    .video-content {
+        width: 90%;
+        max-width: 850px;
+        background: #ffffff;
+        border-radius: 12px;
+        text-align: center;
+        position: relative;
+        box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+    }
+
+    .video-content iframe {
+        width: 100%;
+        height: 100%;
+        aspect-ratio: 16 / 9;
+    }
+
+    .close-btn {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background: #ff6b81;
+        color: white;
+        border: none;
+        padding: 8px 8px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: background 0.3s ease;
+        z-index: 2000;
+    }
+
+    .close-btn:hover {
+        background: #e84118;
+    }
+
+    @media (max-width: 768px) {
+        h1 {
+            font-size: 2rem;
+        }
+        .chapter-title {
+            font-size: 1.4rem;
+        }
+        .lecture {
+            font-size: 1rem;
+        }
+        .video-content {
+            width: 95%;
+        }
+    }
+
+    footer {
+        margin-top: auto;
+        padding: 15px;
+        color: #2c3e50;
+        text-align: center;
+        width: 100%;
+        font-size: 1rem;
+    }
+    </style>
+</head>
+<body>
+<div id="videoModal" class="video-modal" onclick="closeVideo()">
+    <div class="video-content" onclick="event.stopPropagation()">
+        <button class="close-btn" onclick="closeVideo()">×</button>
+        <iframe id="videoFrame" src="" frameborder="0" allowfullscreen></iframe>
+    </div>
+</div>
+
+    <h1>اساجد العكيلي</h1>
+
+    <!-- الفصل الثالث -->
+    <div class="chapter">
+        <div class="chapter-title" onclick="toggleLectures('chapter1')">
+      احكام التلاوة 📕
+        </div>
+        <div id="chapter1" class="lecture-list">
+            <div class="lecture" onclick="openVideo('https://iframe.mediadelivery.net/embed/215061/651c6498-e12f-48ab-8e3c-9ba6f18949f1')">محاضرة 1</div>
+            <div class="lecture" onclick="openVideo('https://iframe.mediadelivery.net/embed/215061/0707b01f-bf4a-4079-829b-1802fccd42c4')">محاضرة 2</div>
+            <div class="lecture" onclick="openVideo('https://iframe.mediadelivery.net/embed/215061/e3a03f56-3495-40f5-bccf-c52576ce235f')">محاضرة 3</div>
+            <div class="lecture" onclick="openVideo('https://iframe.mediadelivery.net/embed/215061/3f97ea15-c216-49cc-a149-3a242c7f4e54')">محاضرة 4</div>
+                    <div class="lecture" onclick="openVideo('https://iframe.mediadelivery.net/embed/215061/4911d9a6-5fe2-4cd9-bfea-9591fc82198b')">محاضرة 5</div>
+           
+      </div>
+    </div>
+
+    <!-- الفصل الرابع -->
+    <div class="chapter">
+        <div class="chapter-title" onclick="toggleLectures('chapter2')">
+           الوحدة الاولى   📗
+        </div>
+        <div id="chapter2" class="lecture-list">
+            <div class="lecture" onclick="openVideo('https://iframe.mediadelivery.net/embed/215061/ba3d633a-8113-40b5-8d7f-1587464dc99d')">محاضرة 1</div>
+            <div class="lecture" onclick="openVideo('https://iframe.mediadelivery.net/embed/215061/5217224f-7a43-4307-b259-85db549aa5ae')">محاضرة 2</div>
+            <div class="lecture" onclick="openVideo('https://iframe.mediadelivery.net/embed/215061/0cd3f218-f091-4b7e-980d-a01c34115e52')">محاضرة 3</div>
+            <div class="lecture" onclick="openVideo('https://iframe.mediadelivery.net/embed/215061/6953b307-f288-4149-a355-21be3a7997d7')">محاضرة 4</div>
+            <div class="lecture" onclick="openVideo('https://iframe.mediadelivery.net/embed/215061/d7189415-d557-402f-97e1-9b6441970853')">محاضرة 5</div>
+            <div class="lecture" onclick="openVideo('https://iframe.mediadelivery.net/embed/215061/89e0f47f-5892-4a08-b09c-f40dc116f7ed')">محاضرة 6</div>
+            <div class="lecture" onclick="openVideo('https://iframe.mediadelivery.net/embed/215061/5741f6ab-111d-4ca4-b12b-92e0d2fc7381')">محاضرة 7</div>
+            <div class="lecture" onclick="openVideo('https://iframe.mediadelivery.net/embed/215061/b226b50c-5828-4036-b512-d684f1a43c38')">محاضرة 8</div>
+            <div class="lecture" onclick="openVideo('https://iframe.mediadelivery.net/embed/215061/16b241cb-40f3-4751-b8da-780fe7d8572f')">محاضرة 9</div>
+               <div class="lecture" onclick="openVideo('https://iframe.mediadelivery.net/embed/215061/d5e94228-c986-4aba-8e27-21887d9ba206')">محاضرة 10</div>
+
+      </div>
+    </div>
+
+    <!-- الفصل الخامس -->
+    <div class="chapter">
+        <div class="chapter-title" onclick="toggleLectures('chapter3')">
+        الوحدة الثانية 📖
+        </div>
+        <div id="chapter3" class="lecture-list">
+            <div class="lecture" onclick="openVideo('https://iframe.mediadelivery.net/embed/215061/58bf9d8a-c51b-4507-930d-61cc4eafcc51')">محاضرة 1</div>
+            <div class="lecture" onclick="openVideo('https://iframe.mediadelivery.net/embed/215061/72179feb-72ee-4a12-85af-59298372efdf')">محاضرة 2</div>
+            <div class="lecture" onclick="openVideo('https://iframe.mediadelivery.net/embed/215061/2c8c0d7e-c9ea-4693-a2d3-2b59ae553242')">محاضرة 3</div>
+            <div class="lecture" onclick="openVideo('https://iframe.mediadelivery.net/embed/215061/26e54bc6-52af-4023-ac45-5997827f8a77')">محاضرة 4</div>
+                    <div class="lecture" onclick="openVideo('https://iframe.mediadelivery.net/embed/215061/8f9c6e33-330a-4386-b9b5-baa1306bdc24')">محاضرة 5</div>
+            <div class="lecture" onclick="openVideo('https://iframe.mediadelivery.net/embed/215061/966fb914-c0e8-453c-bd3f-f64bc63e4942')">محاضرة 6</div>
+            <div class="lecture" onclick="openVideo('https://iframe.mediadelivery.net/embed/215061/a4a17f55-1f18-4f9b-8152-c6897f502dd4')">محاضرة 7</div>
+            <div class="lecture" onclick="openVideo('https://iframe.mediadelivery.net/embed/215061/27971144-c0b6-42d9-9ad5-6d32e4e513c3')">طريقة فهم قصص القران الكريم</div>
+         
+      </div>
+    </div>
+
+    <!-- الفصل السادس -->
+    <div class="chapter">
+        <div class="chapter-title" onclick="toggleLectures('chapter4')">
+     الوحدة الثالثة  📘
+        </div>
+        <div id="chapter4" class="lecture-list">
+            <div class="lecture" onclick="openVideo('https://iframe.mediadelivery.net/embed/215061/0c056621-0ff5-4a15-96bc-0220bcec0d25')">محاضرة 1</div>
+            <div class="lecture" onclick="openVideo('https://iframe.mediadelivery.net/embed/215061/039f866e-0dde-4cf4-9a9e-fd12b6120250')">محاضرة 2</div>
+            <div class="lecture" onclick="openVideo('https://iframe.mediadelivery.net/embed/215061/63a4bec3-44c4-467e-8737-6dd7e6689685')">محاضرة 3</div>
+            <div class="lecture" onclick="openVideo('https://iframe.mediadelivery.net/embed/215061/2063062d-0002-4494-8e13-6f18385e9ffb')">محاضرة 4</div>
+                   <div class="lecture" onclick="openVideo('https://iframe.mediadelivery.net/embed/215061/493a4ebf-e5b8-4012-8ba0-f288cd732490')">محاضرة 5</div>
+                   <div class="lecture" onclick="openVideo('https://iframe.mediadelivery.net/embed/215061/5fd4299f-480b-4a93-ac43-2b583e9ec2ee')">محاضرة 6</div>
+                   <div class="lecture" onclick="openVideo('https://iframe.mediadelivery.net/embed/215061/754d6abc-2b25-4691-a935-864dee9a2aae')">محاضرة 7</div>
+
+      </div>
+    </div>
+
+    <!-- الفصل السابع -->
+    <div class="chapter">
+        <div class="chapter-title" onclick="toggleLectures('chapter5')">
+       الوحدة الرابعة 📒
+        </div>
+        <div id="chapter5" class="lecture-list">
+        
+        <div class="lecture" onclick="openVideo('https://iframe.mediadelivery.net/embed/215061/29957a5a-82a2-4f6e-bde5-5030db0892b0')">محاضرة 1</div>
+            <div class="lecture" onclick="openVideo('https://iframe.mediadelivery.net/embed/215061/03020b01-e99f-44f1-ba7c-1fa07caa4027')">محاضرة 2</div>
+            <div class="lecture" onclick="openVideo('https://iframe.mediadelivery.net/embed/215061/f83a1490-4b24-4d93-89f8-f64a90626fb1')">محاضرة 3</div>
+            
+      </div>
+    </div>
+
+
+    <script>
+        function toggleLectures(chapterId) {
+            const chapter = document.getElementById(chapterId);
+            if (chapter.style.maxHeight) {
+                chapter.style.maxHeight = null;
+            } else {
+                chapter.style.maxHeight = chapter.scrollHeight + "px";
+            }
+        }
+
+        function openVideo(url) {
+            const videoContainer = document.getElementById("video-container");
+            const videoFrame = document.getElementById("video-frame");
+
+            videoFrame.src = url;
+            videoContainer.style.display = "block";
+            window.scrollTo({ top: videoContainer.offsetTop, behavior: "smooth" });
+        }
+
+        function closeVideo() {
+            const videoContainer = document.getElementById("video-container");
+            const videoFrame = document.getElementById("video-frame");
+
+            videoFrame.src = "";
+            videoContainer.style.display = "none";
+        }
+    </script>
+</body>
+</html>
+
+    <footer>
+        <p>&copy; 2025 جميع الحقوق محفوظة</p>
+    </footer>
+
+    <script>
+  function toggleLectures(chapterId) {
+      var chapter = document.getElementById(chapterId);
+      if (chapter.style.display === "none" || chapter.style.display === "") {
+          chapter.style.display = "flex";
+      } else {
+          chapter.style.display = "none";
+      }
+  }
+
+  function openVideo(videoUrl) {
+      var modal = document.getElementById("videoModal");
+      var videoFrame = document.getElementById("videoFrame");
+      videoFrame.src = videoUrl;
+      modal.style.display = "flex";
+  }
+
+  function openVideo(videoUrl) {
+    var modal = document.getElementById("videoModal");
+    var videoFrame = document.getElementById("videoFrame");
+    videoFrame.src = videoUrl;
+    modal.style.display = "flex";  // يظهر المودال
+}
+
+function closeVideo() {
+    var modal = document.getElementById("videoModal");
+    var videoFrame = document.getElementById("videoFrame");
+    videoFrame.src = "";  // إيقاف الفيديو
+    modal.style.display = "none";  // إخفاء المودال
+}
+</script>
+</body>
+</html>
+
